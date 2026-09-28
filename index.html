@@ -1,151 +1,122 @@
-<!-- Le indico al navegador que estoy usando la versión HTML5. -->
 <!DOCTYPE html>
-<!-- Aquí comienza la página. lang informa que el contenido está en español. -->
+<!-- Página TecnoBlog: la estructura y los textos están aquí, los colores en css/estilos.css -->
 <html lang="es">
-<!-- En head coloco los datos de configuración que no se ven dentro de la página. -->
 <head>
-    <!-- Esta codificación permite mostrar bien las tildes y la letra ñ. -->
-    <meta charset="UTF-8">
-    <!-- Esta línea hace que el diseño use el ancho real de celulares y tabletas. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Este texto aparece en la pestaña del navegador. -->
-    <title>TecnoBlog | Inicio</title>
-    <!-- Conecto el HTML con el archivo donde escribí los estilos. -->
-    <link rel="stylesheet" href="css/estilos.css">
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-    <script src="js/index.js" defer></script>
+ <meta charset="UTF-8">
+ <!-- Esta línea hace que la página se vea bien en el celular -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>TecnoBlog</title>
+ <link rel="stylesheet" href="css/estilos.css">
+  <!--  se inlcuye el script de jQuery para uso -->
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+  <!-- se inlcuye el script de JavaScript General del proyecto -->
+  <script src="js/index.js" defer></script>
 </head>
-<!-- En body se encuentra todo el contenido que puede ver el usuario. -->
 <body>
-    <!-- El encabezado contiene el nombre del blog y su menú principal. -->
-    <header class="encabezado" id="inicio">
-        <!-- El contenedor evita que el contenido quede pegado a los bordes. -->
-        <div class="contenedor barra">
-            <!-- Este enlace funciona como nombre y logo sencillo del sitio. -->
-            <a class="logo" href="#inicio">Tecno<span>Blog</span></a>
-            <!-- nav agrupa los enlaces que permiten recorrer la misma página. -->
-            <nav aria-label="Menú principal">
-                <!-- Organicé las opciones en una lista porque pertenecen al mismo menú. -->
-                <ul class="menu">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#articulos">Artículos</a></li>
-                    <li><a href="#categorias">Categorías</a></li>
-                    <li><a href="#nosotros">Sobre el blog</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- main reúne el contenido principal y lo separa del encabezado y del pie. -->
-    <main>
-        <!-- Esta sección presenta el tema de la página apenas se abre. -->
-        <section class="bienvenida">
-            <div class="contenedor bienvenida-contenido">
-                <!-- Este bloque contiene el título, la descripción y el botón de entrada. -->
-                <div>
-                    <p class="texto-pequeno">Blog para estudiantes</p>
-                    <h1>Aprendiendo desarrollo web paso a paso</h1>
-                    <p>En este espacio comparto apuntes sencillos sobre HTML, CSS y JavaScript.</p>
-                    <!-- El botón lleva a la parte donde comienzan los artículos. -->
-                    <a class="boton" href="#articulos">Ver artículos</a>
-                </div>
-                <!-- Este cuadro representa un ejemplo básico de código. -->
-                <div class="ejemplo-codigo" aria-label="Ejemplo sencillo de código HTML">
-                    <p>&lt;h1&gt;Hola mundo&lt;/h1&gt;</p>
-                    <p>&lt;p&gt;Mi primera página&lt;/p&gt;</p>
-                </div>
-            </div>
-        </section>
+ <!-- Encabezado con el nombre del blog y el menú -->
+ <header>
+  <div class="barra">
+   <span class="logo">&lt;/&gt; TecnoBlog</span>
+   <!-- Menú de navegación: cada enlace lleva a una parte de esta página -->
+   <nav aria-label="Menú principal">
+    <ul>
+     <li><a href="#inicio">Inicio</a></li>
+     <li><a href="#articulos">Artículos</a></li>
+     <li><a href="#categorias">Categorías</a></li>
+     <li><a href="#blog">Blog</a></li>
+    </ul>
+   </nav>
+  </div>
+ </header>
 
-        <!-- En esta sección muestro los tres artículos del ejercicio. -->
-        <section class="seccion contenedor" id="articulos">
-            <p class="texto-pequeno">Contenido reciente</p>
-            <h2>Últimos artículos</h2>
-            <!-- Este contenedor permite ordenar las tarjetas en columnas. -->
-            <div class="articulos-grid">
-                <!-- Primer artículo dedicado a la estructura de una página. -->
-                <article class="tarjeta">
-                    <!-- La imagen es local para que funcione sin Internet. -->
-                    <img src="img/html5.svg" alt="Ejemplo de una estructura realizada con HTML">
-                    <div class="tarjeta-contenido">
-                        <p class="categoria">HTML</p>
-                        <h3>¿Qué es HTML5?</h3>
-                        <p>HTML5 se utiliza para organizar los títulos, textos, imágenes y demás partes de una página web.</p>
-                        <!-- time permite reconocer la fecha como un dato de tiempo. -->
-                        <time datetime="2026-09-05">Publicado: 5 de septiembre de 2026</time>
-                        <a href="#resumen-html">Leer resumen</a>
-                    </div>
-                </article>
+ <main>
+  <!-- Bienvenida: título grande y un ejemplo de código -->
+  <section class="bienvenida" id="inicio">
+   <div class="contenedor">
+    <div>
+     <p class="etiqueta">APRENDER DESDE LO BÁSICO</p>
+     <h1>Tecnología explicada sin tantas vueltas</h1>
+     <p>Notas cortas sobre HTML, CSS y JavaScript.</p>
+    </div>
+    <pre class="codigo">&lt;main&gt;
+  &lt;h1&gt;Hola, web&lt;/h1&gt;
+&lt;/main&gt;</pre>
+   </div>
+  </section>
 
-                <!-- Segundo artículo dedicado a la apariencia visual. -->
-                <article class="tarjeta">
-                    <img src="img/css3.svg" alt="Ejemplo de una página a la que se aplican estilos CSS">
-                    <div class="tarjeta-contenido">
-                        <p class="categoria">CSS</p>
-                        <h3>Aprende CSS desde cero</h3>
-                        <p>CSS permite cambiar colores, tamaños, espacios y la forma en que se distribuyen los elementos.</p>
-                        <time datetime="2026-09-02">Publicado: 2 de septiembre de 2026</time>
-                        <a href="#resumen-css">Leer resumen</a>
-                    </div>
-                </article>
+  <!-- Tres artículos del ejercicio, cada uno en una tarjeta -->
+  <section class="seccion contenedor" id="articulos">
+   <h2>Últimos artículos</h2>
+   <div class="articulos-grid">
+    <!-- Primer artículo: estructura de una página -->
+    <article class="tarjeta">
+     <img src="img/html5.svg" alt="Ilustración de HTML5">
+     <h3>¿Qué es HTML5?</h3>
+     <p>La base para escribir la estructura de una página web.</p>
+     <a class="boton" href="#resumen-html">Leer resumen</a>
+    </article>
+    <!-- Segundo artículo: estilos -->
+    <article class="tarjeta">
+     <img src="img/css3.svg" alt="Ilustración de CSS3">
+     <h3>Aprende CSS</h3>
+     <p>Colores, espacios y tamaños para que la página se vea ordenada.</p>
+     <a class="boton" href="#resumen-css">Leer resumen</a>
+    </article>
+    <!-- Tercer artículo: comportamiento -->
+    <article class="tarjeta">
+     <img src="img/javascript.svg" alt="Ilustración de JavaScript">
+     <h3>JavaScript</h3>
+     <p>El lenguaje que le da vida y respuesta a la página.</p>
+     <a class="boton" href="#resumen-js">Leer resumen</a>
+    </article>
+   </div>
+  </section>
 
-                <!-- Tercer artículo dedicado a la interacción de una página. -->
-                <article class="tarjeta">
-                    <img src="img/javascript.svg" alt="Ejemplo de una interacción realizada con JavaScript">
-                    <div class="tarjeta-contenido">
-                        <p class="categoria">JavaScript</p>
-                        <h3>Introducción a JavaScript</h3>
-                        <p>JavaScript se usa cuando necesitamos que la página responda a botones, formularios u otras acciones.</p>
-                        <time datetime="2026-08-28">Publicado: 28 de agosto de 2026</time>
-                        <a href="#resumen-javascript">Leer resumen</a>
-                    </div>
-                </article>
-            </div>
-        </section>
+  <!-- Resúmenes: a esta parte llegan los botones "Leer resumen" -->
+  <section class="fondo-claro">
+   <div class="seccion contenedor">
+    <h2>Resúmenes</h2>
+    <article class="resumen" id="resumen-html">
+     <h3>¿Qué es HTML5?</h3>
+     <p>HTML5 es la versión actual del lenguaje que organiza el contenido de una página: títulos, párrafos, imágenes, menús y secciones como header, nav, main y footer.</p>
+     <a href="#articulos">Volver a los artículos</a>
+    </article>
+    <article class="resumen" id="resumen-css">
+     <h3>Aprende CSS</h3>
+     <p>CSS controla la apariencia: colores, tipografía, márgenes y la forma en que se acomodan los elementos, incluso en pantallas pequeñas.</p>
+     <a href="#articulos">Volver a los artículos</a>
+    </article>
+    <article class="resumen" id="resumen-js">
+     <h3>JavaScript</h3>
+     <p>JavaScript permite que la página reaccione a lo que hace la persona: validar formularios, mostrar mensajes o actualizar datos sin recargar.</p>
+     <a href="#articulos">Volver a los artículos</a>
+    </article>
+   </div>
+  </section>
 
-        <!-- Agregué explicaciones cortas para que los enlaces Leer resumen tengan destino. -->
-        <section class="resumenes">
-            <div class="contenedor">
-                <h2>Ideas principales</h2>
-                <!-- Cada article tiene un id para llegar desde su tarjeta. -->
-                <article id="resumen-html">
-                    <h3>HTML organiza el contenido</h3>
-                    <p>Con HTML puedo indicar qué parte es un título, un párrafo, una imagen o un menú.</p>
-                </article>
-                <article id="resumen-css">
-                    <h3>CSS cambia la presentación</h3>
-                    <p>Con CSS puedo usar clases para aplicar un mismo estilo en varios elementos.</p>
-                </article>
-                <article id="resumen-javascript">
-                    <h3>JavaScript agrega acciones</h3>
-                    <p>Con JavaScript se pueden validar datos y modificar el contenido mientras la página está abierta.</p>
-                </article>
-            </div>
-        </section>
-
-        <!-- Esta sección conserva las categorías del ejemplo original. -->
-        <section class="seccion contenedor" id="categorias">
-            <p class="texto-pequeno">Temas disponibles</p>
-            <h2>Categorías</h2>
+  <!-- Categorías del blog -->
+  <section class="seccion contenedor" id="categorias">
+   <h2>Categorías</h2>
             <!-- Uso una lista porque son varios temas relacionados. -->
-            <ul class="lista-categorias" id="lista-categorias"><li>Diseño web</li>
-            </ul>
-        </section>
+    <ul class="lista-categorias" id="lista-categorias"></ul>
+  </section>
 
-        <!-- En esta parte explico para qué hice el blog. -->
-        <section class="sobre-blog" id="nosotros">
-            <div class="contenedor">
-                <h2>Sobre el blog</h2>
-                <p>Este blog reúne notas cortas para estudiantes que están empezando en desarrollo web. La idea es tener ejemplos fáciles de consultar y practicar.</p>
-            </div>
-        </section>
-    </main>
+  <!-- Sobre el blog -->
+  <section class="fondo-claro" id="blog">
+   <div class="seccion contenedor">
+    <h2>Sobre el blog</h2>
+    <p>TecnoBlog reúne notas cortas para quienes empiezan en el desarrollo web. Cada artículo explica una idea con palabras sencillas y un ejemplo pequeño.</p>
+   </div>
+  </section>
+ </main>
 
-    <!-- El footer cierra la página y muestra el autor del trabajo. -->
-    <footer class="pie-pagina">
-        <div class="contenedor">
-            <p>TecnoBlog - Grupo Front End B01 - <span class="anio">0000</span></p>
-        </div>
-    </footer>
+ <!-- Pie de página con los datos del autor -->
+ <footer>
+  <p>TecnoBlog &copy; <span class="anio"></span></p>
+  <p>Autores: Sebastián Acosta Ramírez, Alejandro Cifuentes Osorio, Diego Rojas Marín, Juan David Gómez Arbeladez y Luis Ramos Quesada</p>
+  <p>Desarrollo Front End · Grupo B03, Subgrupo 4 · Politécnico Grancolombiano</p>
+ </footer>
+
 </body>
 </html>

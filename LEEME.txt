@@ -1,20 +1,11 @@
-ENTREGA OPCIONAL 5 - TECNOBLOG
-
-Autor: Luis Alberto Ramos Quesada
-Módulo: Desarrollo de Front-end
-
-Instrucciones:
-1. Descomprima la carpeta.
-2. Abra el archivo index.html en Chrome, Firefox o Edge.
-3. No se necesita instalar programas ni tener conexión a Internet.
-
-La entrega utiliza únicamente HTML5 y CSS. No necesita JavaScript.
-
-Los comentarios explican con palabras sencillas qué hace cada sección del HTML y para qué se utiliza cada grupo de estilos.
-
-La página se adapta a computador, tableta y celular.
+TecnoBlog - Desarrollo de Front-end, Politecnico Grancolombiano
+Como abrir: descomprimir la carpeta y abrir index.html en Chrome, Firefox o Edge. No necesita internet.
+Archivos: index.html (estructura y textos), css/estilos.css (colores y distribucion), img/ (3 ilustraciones).
+Autores (Grupo B03, Subgrupo 4): Sebastian Acosta Ramirez, Alejandro Cifuentes Osorio, Diego Rojas Marin, Juan David Gomez Arbeladez, Luis Ramos Quesada.
 
 Mejoras
-- se incorpora Jquery al proyecto y
+- se actualiza el UX
+- se incorpora Jquery al proyecto
 - se incluye listado de categorias dinámico con jquery
 - se incluye cambid e año con uso de selector de jquery
+
