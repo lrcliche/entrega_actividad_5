@@ -13,3 +13,8 @@ La entrega utiliza únicamente HTML5 y CSS. No necesita JavaScript.
 Los comentarios explican con palabras sencillas qué hace cada sección del HTML y para qué se utiliza cada grupo de estilos.
 
 La página se adapta a computador, tableta y celular.
+
+Mejoras
+- se incorpora Jquery al proyecto y
+- se incluye listado de categorias dinámico con jquery
+- se incluye cambid e año con uso de selector de jquery
