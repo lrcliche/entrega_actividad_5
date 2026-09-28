@@ -1,0 +1,15 @@
+ENTREGA OPCIONAL 5 - TECNOBLOG
+
+Autor: Luis Alberto Ramos Quesada
+Módulo: Desarrollo de Front-end
+
+Instrucciones:
+1. Descomprima la carpeta.
+2. Abra el archivo index.html en Chrome, Firefox o Edge.
+3. No se necesita instalar programas ni tener conexión a Internet.
+
+La entrega utiliza únicamente HTML5 y CSS. No necesita JavaScript.
+
+Los comentarios explican con palabras sencillas qué hace cada sección del HTML y para qué se utiliza cada grupo de estilos.
+
+La página se adapta a computador, tableta y celular.

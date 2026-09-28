@@ -1,0 +1,330 @@
+/* Guardo estos colores como variables para no escribir los mismos códigos varias veces. */
+:root {
+    /* Azul oscuro para títulos y fondos. */
+    --azul-oscuro: #172b4d;
+    /* Azul para enlaces, botones y detalles. */
+    --azul: #2f65cb;
+    /* Gris claro del fondo general. */
+    --fondo: #f4f6f9;
+    /* Color normal de los párrafos. */
+    --texto: #303846;
+    /* Color suave usado en los bordes. */
+    --borde: #d7dde7;
+}
+
+/* Hace que el espacio interno no aumente el ancho final de los elementos. */
+* {
+    box-sizing: border-box;
+}
+
+/* El desplazamiento suave mejora el recorrido por los enlaces internos. */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Aspecto general de todo el documento. */
+body {
+    /* Quito el margen automático del navegador. */
+    margin: 0;
+    /* Uso una fuente común que funciona en la mayoría de equipos. */
+    font-family: Arial, Helvetica, sans-serif;
+    /* Aplico el color normal de los textos. */
+    color: var(--texto);
+    /* Dejo un fondo claro para diferenciar las tarjetas blancas. */
+    background-color: var(--fondo);
+    /* Aumento un poco el espacio entre líneas para facilitar la lectura. */
+    line-height: 1.6;
+}
+
+/* Evito que una imagen sea más ancha que su contenedor. */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Centra el contenido y deja espacio en ambos lados. */
+.contenedor {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Fondo y borde del encabezado. */
+.encabezado {
+    background-color: white;
+    border-bottom: 1px solid var(--borde);
+}
+
+/* Coloca el logo y el menú en una misma fila. */
+.barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 70px;
+}
+
+/* Presenta el nombre TecnoBlog como un logo sencillo. */
+.logo {
+    color: var(--azul-oscuro);
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Colorea de azul la segunda parte del nombre. */
+.logo span {
+    color: var(--azul);
+}
+
+/* Quito los puntos de la lista y organizo el menú en una fila. */
+.menu {
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Quito el subrayado y aplico un color oscuro a los enlaces del menú. */
+.menu a {
+    color: var(--azul-oscuro);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Al pasar el mouse, el enlace cambia de color. */
+.menu a:hover {
+    color: var(--azul);
+}
+
+/* La bienvenida usa fondo oscuro y texto blanco para destacarse. */
+.bienvenida {
+    padding: 70px 0;
+    color: white;
+    background-color: var(--azul-oscuro);
+}
+
+/* Divido la bienvenida en dos columnas: texto y ejemplo. */
+.bienvenida-contenido {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+/* Ajusto el título principal para que sea visible sin exagerar su tamaño. */
+h1 {
+    max-width: 650px;
+    margin: 8px 0 18px;
+    font-size: 44px;
+    line-height: 1.1;
+}
+
+/* Los títulos de sección comparten tamaño, color y espacio inferior. */
+h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--azul-oscuro);
+    font-size: 30px;
+}
+
+/* Esta clase sirve como etiqueta antes de algunos títulos. */
+.texto-pequeno {
+    margin-bottom: 5px;
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* En el fondo oscuro uso un tono más claro para poder leer la etiqueta. */
+.bienvenida .texto-pequeno {
+    color: #9bbcff;
+}
+
+/* Este enlace se presenta como el botón principal. */
+.boton {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 11px 18px;
+    color: white;
+    background-color: var(--azul);
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* El cuadro representa unas líneas de código. */
+.ejemplo-codigo {
+    padding: 22px;
+    background-color: #0d1b30;
+    border: 1px solid #455a79;
+    border-radius: 7px;
+    font-family: monospace;
+}
+
+/* Quito el margen de la última línea del ejemplo. */
+.ejemplo-codigo p:last-child {
+    margin-bottom: 0;
+}
+
+/* Dejo el mismo espacio arriba y abajo en las secciones principales. */
+.seccion {
+    padding-top: 65px;
+    padding-bottom: 65px;
+}
+
+/* En computador las tarjetas se muestran en tres columnas. */
+.articulos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Cada artículo se presenta en una tarjeta blanca y sencilla. */
+.tarjeta {
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+}
+
+/* Este espacio evita que el texto quede pegado a los bordes. */
+.tarjeta-contenido {
+    padding: 20px;
+}
+
+/* La categoría aparece como un texto azul pequeño. */
+.categoria {
+    margin: 0 0 7px;
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Ajusto el título que aparece dentro de cada tarjeta. */
+.tarjeta h3 {
+    margin: 0 0 10px;
+    color: var(--azul-oscuro);
+}
+
+/* La fecha se muestra en otra línea y con menor tamaño. */
+.tarjeta time {
+    display: block;
+    margin: 15px 0;
+    color: #667085;
+    font-size: 13px;
+}
+
+/* Distingo los enlaces de las tarjetas por su color azul. */
+.tarjeta a {
+    color: var(--azul);
+    font-weight: bold;
+}
+
+/* Los resúmenes tienen fondo blanco para separarlos de los artículos. */
+.resumenes {
+    padding: 60px 0;
+    background-color: white;
+}
+
+/* Una línea divide cada resumen sin recargar la página. */
+.resumenes article {
+    padding: 16px 0;
+    border-top: 1px solid var(--borde);
+}
+
+/* Quito espacios innecesarios en los títulos de los resúmenes. */
+.resumenes h3 {
+    margin: 0 0 6px;
+}
+
+/* Distribuyo la lista de categorías en cinco columnas. */
+.lista-categorias {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Cada categoría tiene un fondo blanco y un borde básico. */
+.lista-categorias li {
+    padding: 16px;
+    background-color: white;
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Presento el propósito del blog con un fondo azul claro. */
+.sobre-blog {
+    padding: 55px 0;
+    background-color: #e8effc;
+}
+
+/* Limito el ancho del párrafo para evitar líneas demasiado largas. */
+.sobre-blog p {
+    max-width: 750px;
+}
+
+/* El pie usa el mismo color oscuro de la bienvenida. */
+.pie-pagina {
+    padding: 22px 0;
+    color: white;
+    background-color: var(--azul-oscuro);
+    text-align: center;
+}
+
+/* Quito el margen del párrafo para reducir la altura del pie. */
+.pie-pagina p {
+    margin: 0;
+}
+
+/* Estas reglas se aplican en tabletas y celulares. */
+@media (max-width: 800px) {
+    /* La bienvenida pasa de dos columnas a una. */
+    .bienvenida-contenido {
+        grid-template-columns: 1fr;
+    }
+
+    /* Los artículos se colocan uno debajo del otro. */
+    .articulos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Las categorías se organizan en dos columnas. */
+    .lista-categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Estas reglas se aplican solamente en pantallas pequeñas. */
+@media (max-width: 560px) {
+    /* El logo y el menú se colocan uno debajo del otro. */
+    .barra {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 0;
+    }
+
+    /* El menú puede bajar de línea cuando no tiene espacio. */
+    .menu {
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-top: 12px;
+    }
+
+    /* Reduzco el título para que no se salga de la pantalla. */
+    h1 {
+        font-size: 34px;
+    }
+
+    /* En celular las categorías quedan una debajo de otra. */
+    .lista-categorias {
+        grid-template-columns: 1fr;
+    }
+}
