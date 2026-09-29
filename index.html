@@ -7,10 +7,16 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <title>TecnoBlog</title>
  <link rel="stylesheet" href="css/estilos.css">
+ <!-- Estilos de jQuery UI para widgets, tooltips y efectos (local para funcionar sin conexión) -->
+ <link rel="stylesheet" href="css/jquery-ui.min.css">
  <!-- Se incluye el script de jQuery local para garantizar funcionamiento sin conexión a Internet -->
  <script src="js/jquery.min.js"></script>
  <!-- Respaldo desde CDN por si se requiere en diferentes entornos de desarrollo -->
  <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.7.1.min.js"><\/script>')</script>
+ <!-- Se incluye la librería de jQuery UI local para widgets, animaciones y accesibilidad -->
+ <script src="js/jquery-ui.min.js"></script>
+ <!-- Respaldo desde CDN para jQuery UI -->
+ <script>window.jQuery && window.jQuery.ui || document.write('<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"><\/script>')</script>
  <!-- Se incluye el script de JavaScript General del proyecto con las mejoras de UX documentadas -->
  <script src="js/index.js" defer></script>
 </head>
@@ -142,6 +148,12 @@
   <p>Autores: Sebastián Acosta Ramírez, Alejandro Cifuentes Osorio, Diego Rojas Marín, Juan David Gómez Arbeladez y Luis Ramos Quesada</p>
   <p>Desarrollo Front End · Grupo B03, Subgrupo 4 · Politécnico Grancolombiano</p>
  </footer>
+
+ <!-- Botón flotante interactivo y responsive "Volver arriba" implementado con jQuery / jQuery UI -->
+ <button type="button" id="btn-volver-arriba" class="btn-volver-arriba" title="Volver al inicio de la página" aria-label="Volver arriba">
+  <span class="icono-arriba" aria-hidden="true">&#9650;</span>
+  <span class="texto-arriba">Arriba</span>
+ </button>
 
 </body>
 </html>

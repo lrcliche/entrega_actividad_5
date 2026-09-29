@@ -142,4 +142,67 @@ $(document).ready(function () {
     // Seleccionamos con jQuery la clase '.anio' y asignamos el año vigente
     $('.anio').text(new Date().getFullYear());
 
+    // ======================================================================
+    // 7. BOTÓN FLOTANTE "VOLVER ARRIBA" (jQuery UI / UX)
+    // ======================================================================
+    const $btnVolverArriba = $('#btn-volver-arriba');
+
+    // Detección del scroll de la ventana para mostrar u ocultar el botón
+    $(window).on('scroll', function () {
+        if ($(this).scrollTop() > 280) {
+            // Si el usuario bajó más de 280px y el botón está oculto, se muestra con fade
+            if (!$btnVolverArriba.is(':visible')) {
+                $btnVolverArriba.css('display', 'flex').hide().stop(true, true).fadeIn(250);
+            }
+        } else {
+            // Si está cerca del tope y el botón está visible, se oculta suavemente
+            if ($btnVolverArriba.is(':visible')) {
+                $btnVolverArriba.stop(true, true).fadeOut(250);
+            }
+        }
+    });
+
+    // Al hacer clic en el botón flotante, desplazamiento suave animado hacia el inicio
+    $btnVolverArriba.on('click', function () {
+        $('html, body').stop().animate({
+            scrollTop: 0
+        }, 500);
+    });
+
+    // ======================================================================
+    // 8. WIDGETS Y MEJORAS VISUALES CON LA LIBRERÍA JQUERY UI
+    // ======================================================================
+    // Tooltip oficial de jQuery UI en el botón flotante para accesibilidad y diseño
+    if ($.fn.tooltip) {
+        $btnVolverArriba.tooltip({
+            position: { my: "right center", at: "left-12 center" },
+            show: { effect: "fadeIn", duration: 150 },
+            hide: { effect: "fadeOut", duration: 150 }
+        });
+    }
+
+    // Autocompletado inteligente de jQuery UI en la barra de búsqueda interactiva
+    if ($.fn.autocomplete) {
+        const temasSugeridos = [
+            "HTML5",
+            "CSS",
+            "JavaScript",
+            "Jquery",
+            "Programación",
+            "Diseño web",
+            "¿Qué es HTML5?",
+            "Aprende CSS"
+        ];
+
+        $('#buscador').autocomplete({
+            source: temasSugeridos,
+            minLength: 1,
+            select: function (event, ui) {
+                $(this).val(ui.item.value);
+                $('#lista-categorias li').removeClass('categoria-activa');
+                filtrarArticulos(ui.item.value);
+            }
+        });
+    }
+
 });

@@ -192,6 +192,87 @@ nav a:hover,nav a:focus{border-bottom-color:#60a5fa}
 footer{background:var(--azul-oscuro);color:#cbd5e1;text-align:center;padding:1.5rem 1.2rem;font-size:.9rem}
 footer p{margin:.2rem 0}
 
+/* ===== Botón flotante "Volver arriba" (jQuery UI / UX) ===== */
+.btn-volver-arriba{
+    position:fixed;
+    bottom:2rem;
+    right:2rem;
+    z-index:999;
+    display:none; /* Se muestra dinámicamente con animación jQuery al hacer scroll */
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    padding:.7rem 1.15rem;
+    background:linear-gradient(135deg,var(--azul),#1d4ed8);
+    color:var(--blanco);
+    border:none;
+    border-radius:50px;
+    font-size:.92rem;
+    font-weight:700;
+    font-family:inherit;
+    cursor:pointer;
+    box-shadow:0 6px 20px rgba(7,26,51,.28);
+    transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+    user-select:none;
+}
+.btn-volver-arriba:hover{
+    background:linear-gradient(135deg,#1d4ed8,var(--azul-oscuro));
+    transform:translateY(-4px);
+    box-shadow:0 10px 24px rgba(7,26,51,.36);
+}
+.btn-volver-arriba:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 3px rgba(34,211,238,.5),0 8px 20px rgba(7,26,51,.3);
+}
+.btn-volver-arriba:active{
+    transform:translateY(-1px);
+}
+.btn-volver-arriba .icono-arriba{
+    font-size:.85rem;
+    line-height:1;
+    transition:transform .2s ease;
+}
+.btn-volver-arriba:hover .icono-arriba{
+    transform:translateY(-2px);
+}
+
+/* ===== Estilos personalizados para componentes jQuery UI ===== */
+/* Tooltip flotante con diseño moderno */
+.ui-tooltip{
+    background:var(--azul-oscuro) !important;
+    color:var(--blanco) !important;
+    border:1px solid rgba(255,255,255,.15) !important;
+    border-radius:8px !important;
+    padding:.4rem .75rem !important;
+    font-size:.82rem !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.2) !important;
+    font-family:"Segoe UI",Arial,sans-serif !important;
+}
+/* Menú desplegable de Autocomplete de jQuery UI para el buscador */
+.ui-autocomplete{
+    background:var(--blanco) !important;
+    border:1px solid #cbd5e1 !important;
+    border-radius:10px !important;
+    box-shadow:0 8px 24px rgba(11,37,69,.15) !important;
+    padding:.4rem 0 !important;
+    font-family:"Segoe UI",Arial,sans-serif !important;
+    max-height:240px;
+    overflow-y:auto;
+    z-index:1000 !important;
+}
+.ui-menu-item-wrapper{
+    padding:.5rem 1rem !important;
+    font-size:.95rem !important;
+    color:var(--texto) !important;
+    transition:background .15s ease !important;
+}
+.ui-menu-item-wrapper.ui-state-active{
+    background:#dbeafe !important;
+    color:var(--azul-oscuro) !important;
+    border:none !important;
+    font-weight:600 !important;
+}
+
 /* ===== Tabletas y celulares ===== */
 @media (max-width:800px){
  .bienvenida .contenedor{grid-template-columns:1fr}      /* bienvenida en una columna */
@@ -225,4 +306,20 @@ footer p{margin:.2rem 0}
  .lista-categorias{gap:.65rem}
  /* Ajuste del buscador para que ocupe todo el ancho en celulares */
  .buscador-campo{max-width:100%}
+
+ /* Botón flotante volver arriba compacto y circular en celulares (responsive) */
+ .btn-volver-arriba{
+     bottom:1.2rem;
+     right:1.2rem;
+     width:46px;
+     height:46px;
+     padding:0;
+     border-radius:50%;
+ }
+ .btn-volver-arriba .texto-arriba{
+     display:none;
+ }
+ .btn-volver-arriba .icono-arriba{
+     font-size:1rem;
+ }
 }
