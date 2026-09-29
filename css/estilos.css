@@ -1,9 +1,11 @@
 /* ===== Colores reutilizables (variables) ===== */
 :root{
- --azul-oscuro:#0b2545;   /* fondo del encabezado y pie */
- --azul:#1d4ed8;          /* botones y enlaces */
- --claro:#eef3fb;         /* fondo de secciones */
+ --azul-oscuro:#071a33;   /* fondo del encabezado y pie */
+ --acento:#22d3ee;
+ --azul:#60a5fa;          /* botones y enlaces */
+ --claro:#f1f5f9;         /* fondo de secciones */
  --blanco:#ffffff;
+ --gris:#64748b;
  --texto:#1e293b;         /* texto principal */
 }
 /* Reglas generales: la caja incluye el borde y la fuente es la misma en toda la página */
@@ -19,9 +21,23 @@ a{color:var(--azul)}
 .seccion h2{margin-top:0;color:var(--azul-oscuro)}
 
 /* ===== Encabezado y menú ===== */
-header{background:var(--azul-oscuro);color:var(--blanco);position:sticky;top:0;z-index:5}
+header{
+    background:rgba(7,26,51,.92);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    color:var(--blanco);
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
 .barra{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding:.8rem 1.2rem}
-.logo{font-weight:700;font-size:1.3rem}
+.logo{
+    font-weight:800;
+    font-size:1.35rem;
+    letter-spacing:-.03em;
+    color:white;
+}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.2rem}
 nav a{color:var(--blanco);text-decoration:none;padding:.3rem 0;border-bottom:2px solid transparent}
 nav a:hover,nav a:focus{border-bottom-color:#60a5fa}
