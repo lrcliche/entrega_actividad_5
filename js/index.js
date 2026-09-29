@@ -142,9 +142,7 @@ $(document).ready(function () {
     // Seleccionamos con jQuery la clase '.anio' y asignamos el año vigente
     $('.anio').text(new Date().getFullYear());
 
-    // ======================================================================
     // 7. BOTÓN FLOTANTE "VOLVER ARRIBA" (jQuery UI / UX)
-    // ======================================================================
     const $btnVolverArriba = $('#btn-volver-arriba');
 
     // Detección del scroll de la ventana para mostrar u ocultar el botón
@@ -169,9 +167,7 @@ $(document).ready(function () {
         }, 500);
     });
 
-    // ======================================================================
     // 8. WIDGETS Y MEJORAS VISUALES CON LA LIBRERÍA JQUERY UI
-    // ======================================================================
     // Tooltip oficial de jQuery UI en el botón flotante para accesibilidad y diseño
     if ($.fn.tooltip) {
         $btnVolverArriba.tooltip({
@@ -183,16 +179,23 @@ $(document).ready(function () {
 
     // Autocompletado inteligente de jQuery UI en la barra de búsqueda interactiva
     if ($.fn.autocomplete) {
-        const temasSugeridos = [
+        // Obtenemos dinámicamente los títulos de todos los artículos presentes en la página
+        const titulosArticulos = $('.tarjeta h3').map(function () {
+            return $(this).text().trim();
+        }).get();
+
+        // Lista completa con todos los artículos, categorías y temas para el autocompletado
+        const temasSugeridos = Array.from(new Set([
+            ...titulosArticulos,
+            ...categorias,
             "HTML5",
-            "CSS",
-            "JavaScript",
-            "Jquery",
-            "Programación",
-            "Diseño web",
-            "¿Qué es HTML5?",
-            "Aprende CSS"
-        ];
+            "CSS3",
+            "JavaScript Moderno",
+            "jQuery y jQuery UI",
+            "Programación Web",
+            "Diseño Web y UX",
+            "Desarrollo Frontend"
+        ]));
 
         $('#buscador').autocomplete({
             source: temasSugeridos,
@@ -201,6 +204,7 @@ $(document).ready(function () {
                 $(this).val(ui.item.value);
                 $('#lista-categorias li').removeClass('categoria-activa');
                 filtrarArticulos(ui.item.value);
+                return false;
             }
         });
     }
