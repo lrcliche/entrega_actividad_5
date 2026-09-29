@@ -1,9 +1,11 @@
 /* ===== Colores reutilizables (variables) ===== */
 :root{
- --azul-oscuro:#0b2545;   /* fondo del encabezado y pie */
- --azul:#1d4ed8;          /* botones y enlaces */
- --claro:#eef3fb;         /* fondo de secciones */
+ --azul-oscuro:#071a33;   /* fondo del encabezado y pie */
+ --acento:#22d3ee;
+ --azul:#60a5fa;          /* botones y enlaces */
+ --claro:#f1f5f9;         /* fondo de secciones */
  --blanco:#ffffff;
+ --gris:#64748b;
  --texto:#1e293b;         /* texto principal */
 }
 /* Reglas generales: la caja incluye el borde y la fuente es la misma en toda la página */
@@ -19,9 +21,23 @@ a{color:var(--azul)}
 .seccion h2{margin-top:0;color:var(--azul-oscuro)}
 
 /* ===== Encabezado y menú ===== */
-header{background:var(--azul-oscuro);color:var(--blanco);position:sticky;top:0;z-index:5}
+header{
+    background:rgba(7,26,51,.92);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    color:var(--blanco);
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
 .barra{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding:.8rem 1.2rem}
-.logo{font-weight:700;font-size:1.3rem}
+.logo{
+    font-weight:800;
+    font-size:1.35rem;
+    letter-spacing:-.03em;
+    color:white;
+}
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.2rem}
 nav a{color:var(--blanco);text-decoration:none;padding:.3rem 0;border-bottom:2px solid transparent}
 nav a:hover,nav a:focus{border-bottom-color:#60a5fa}
@@ -33,27 +49,229 @@ nav a:hover,nav a:focus{border-bottom-color:#60a5fa}
 .bienvenida h1{font-size:2.6rem;line-height:1.15;margin:.4rem 0}
 .codigo{background:#020617;color:#a5f3fc;border-radius:10px;padding:1rem;font-family:Consolas,monospace;font-size:.95rem;overflow-x:auto;margin:0}
 
+/* ===== Buscador interactivo (Mejora de UX con jQuery) ===== */
+/* Contenedor que da separación al buscador antes de la cuadrícula de artículos */
+.buscador-contenedor{margin-bottom:1.5rem}
+/* Agrupa el icono de lupa, el campo de texto y el botón para limpiar */
+.buscador-campo{position:relative;display:flex;align-items:center;max-width:550px}
+/* Ícono decorativo de búsqueda dentro del campo */
+.buscador-icono{position:absolute;left:.85rem;font-size:1rem;color:var(--gris);pointer-events:none}
+/* Campo de entrada de texto estilizado */
+.buscador-input{
+    width:100%;
+    padding:.75rem 2.4rem .75rem 2.6rem;
+    font-size:1rem;
+    font-family:inherit;
+    border:2px solid #cbd5e1;
+    border-radius:10px;
+    outline:none;
+    transition:border-color .2s ease,box-shadow .2s ease;
+    background:var(--blanco);
+    color:var(--texto);
+}
+/* Efecto al hacer foco (focus) en el input para accesibilidad y presencia visual */
+.buscador-input:focus{
+    border-color:var(--azul);
+    box-shadow:0 0 0 3px rgba(96,165,250,.25);
+}
+/* Botón para limpiar la búsqueda rápidamente */
+.btn-limpiar{
+    position:absolute;
+    right:.6rem;
+    background:transparent;
+    border:none;
+    font-size:1.35rem;
+    line-height:1;
+    color:var(--gris);
+    cursor:pointer;
+    padding:.2rem .4rem;
+    border-radius:50%;
+    transition:color .2s ease,background .2s ease;
+}
+.btn-limpiar:hover{color:var(--azul-oscuro);background:#e2e8f0}
+/* Contador dinámico de artículos visibles para feedback al usuario */
+.contador-articulos{font-size:.88rem;color:var(--gris);margin:.5rem 0 0 .2rem;font-weight:500}
+
+/* Mensaje visual informativo cuando ningún artículo coincide */
+.sin-resultados{
+    text-align:center;
+    padding:2.2rem 1.5rem;
+    background:var(--claro);
+    border:1px dashed #cbd5e1;
+    border-radius:12px;
+    margin-top:1rem;
+}
+.sin-resultados p{font-size:1.05rem;color:var(--texto);margin:0 0 1rem}
+/* Botón para restablecer la vista de todos los artículos */
+.boton-restablecer{
+    background:var(--azul);
+    color:var(--blanco);
+    border:none;
+    padding:.6rem 1.2rem;
+    font-size:.95rem;
+    font-weight:600;
+    border-radius:8px;
+    cursor:pointer;
+    transition:background .2s ease,transform .15s ease;
+}
+.boton-restablecer:hover{background:var(--azul-oscuro);transform:scale(1.02)}
+
 /* ===== Tarjetas de artículos ===== */
 .articulos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.tarjeta{background:var(--blanco);border:1px solid #d5deed;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(11,37,69,.08)}
+.tarjeta{
+    background:var(--blanco);
+    border:1px solid #d5deed;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(11,37,69,.08);
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+/* Efecto hover: eleva suavemente la tarjeta para dar dinamismo a la interfaz */
+.tarjeta:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 18px rgba(11,37,69,.12);
+    border-color:#93c5fd;
+}
 .tarjeta h3{margin:.8rem 1rem .3rem}
 .tarjeta p{margin:0 1rem 1rem}
-.boton{display:inline-block;margin:0 1rem 1.2rem;background:var(--azul);color:var(--blanco);padding:.5rem 1rem;border-radius:8px;text-decoration:none;font-weight:600}
-.boton:hover,.boton:focus{background:var(--azul-oscuro)}
+.boton{
+    display:inline-block;
+    margin:0 1rem 1.2rem;
+    background:var(--azul);
+    color:var(--blanco);
+    padding:.5rem 1rem;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    transition:background .2s ease,transform .15s ease;
+}
+.boton:hover,.boton:focus{
+    background:var(--azul-oscuro);
+    transform:scale(1.02);
+}
 
 /* ===== Resúmenes ===== */
 .fondo-claro{background:var(--claro)}
-.resumen{background:var(--blanco);border-left:5px solid var(--azul);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem}
+.resumen{background:var(--blanco);border-left:5px solid var(--azul);border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;transition:background-color .3s ease}
 .resumen h3{margin-top:0}
 .resumen:target{background:#dbeafe}   /* se resalta al llegar desde su tarjeta */
 
-/* ===== Categorías ===== */
+/* ===== Categorías interactivas ===== */
+/* Texto de orientación visual que indica cómo interactuar con las categorías */
+.categorias-ayuda{font-size:.92rem;color:var(--gris);margin-bottom:1rem}
 .lista-categorias{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
-.lista-categorias li{background:var(--claro);border:1px solid #d5deed;border-radius:8px;padding:.8rem;text-align:center;font-weight:600}
+.lista-categorias li{
+    background:var(--claro);
+    border:1px solid #d5deed;
+    border-radius:8px;
+    padding:.8rem;
+    text-align:center;
+    font-weight:600;
+    cursor:pointer;
+    user-select:none;
+    transition:all .2s ease;
+}
+/* Efecto hover: indica al usuario que la categoría es clickable */
+.lista-categorias li:hover{
+    background:#e0f2fe;
+    border-color:var(--azul);
+    color:#0369a1;
+    transform:translateY(-2px);
+    box-shadow:0 3px 8px rgba(0,0,0,.06);
+}
+/* Clase activada dinámicamente con jQuery al seleccionar una categoría */
+.lista-categorias li.categoria-activa{
+    background:var(--azul);
+    color:var(--blanco);
+    border-color:var(--azul-oscuro);
+    box-shadow:0 4px 12px rgba(96,165,250,.4);
+    transform:translateY(-2px);
+}
 
 /* ===== Pie de página ===== */
 footer{background:var(--azul-oscuro);color:#cbd5e1;text-align:center;padding:1.5rem 1.2rem;font-size:.9rem}
 footer p{margin:.2rem 0}
+
+/* ===== Botón flotante "Volver arriba" (jQuery UI / UX) ===== */
+.btn-volver-arriba{
+    position:fixed;
+    bottom:2rem;
+    right:2rem;
+    z-index:999;
+    display:none; /* Se muestra dinámicamente con animación jQuery al hacer scroll */
+    align-items:center;
+    justify-content:center;
+    gap:.4rem;
+    padding:.7rem 1.15rem;
+    background:linear-gradient(135deg,var(--azul),#1d4ed8);
+    color:var(--blanco);
+    border:none;
+    border-radius:50px;
+    font-size:.92rem;
+    font-weight:700;
+    font-family:inherit;
+    cursor:pointer;
+    box-shadow:0 6px 20px rgba(7,26,51,.28);
+    transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+    user-select:none;
+}
+.btn-volver-arriba:hover{
+    background:linear-gradient(135deg,#1d4ed8,var(--azul-oscuro));
+    transform:translateY(-4px);
+    box-shadow:0 10px 24px rgba(7,26,51,.36);
+}
+.btn-volver-arriba:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 3px rgba(34,211,238,.5),0 8px 20px rgba(7,26,51,.3);
+}
+.btn-volver-arriba:active{
+    transform:translateY(-1px);
+}
+.btn-volver-arriba .icono-arriba{
+    font-size:.85rem;
+    line-height:1;
+    transition:transform .2s ease;
+}
+.btn-volver-arriba:hover .icono-arriba{
+    transform:translateY(-2px);
+}
+
+/* ===== Estilos personalizados para componentes jQuery UI ===== */
+/* Tooltip flotante con diseño moderno */
+.ui-tooltip{
+    background:var(--azul-oscuro) !important;
+    color:var(--blanco) !important;
+    border:1px solid rgba(255,255,255,.15) !important;
+    border-radius:8px !important;
+    padding:.4rem .75rem !important;
+    font-size:.82rem !important;
+    box-shadow:0 4px 14px rgba(0,0,0,.2) !important;
+    font-family:"Segoe UI",Arial,sans-serif !important;
+}
+/* Menú desplegable de Autocomplete de jQuery UI para el buscador */
+.ui-autocomplete{
+    background:var(--blanco) !important;
+    border:1px solid #cbd5e1 !important;
+    border-radius:10px !important;
+    box-shadow:0 8px 24px rgba(11,37,69,.15) !important;
+    padding:.4rem 0 !important;
+    font-family:"Segoe UI",Arial,sans-serif !important;
+    max-height:240px;
+    overflow-y:auto;
+    z-index:1000 !important;
+}
+.ui-menu-item-wrapper{
+    padding:.5rem 1rem !important;
+    font-size:.95rem !important;
+    color:var(--texto) !important;
+    transition:background .15s ease !important;
+}
+.ui-menu-item-wrapper.ui-state-active{
+    background:#dbeafe !important;
+    color:var(--azul-oscuro) !important;
+    border:none !important;
+    font-weight:600 !important;
+}
 
 /* ===== Tabletas y celulares ===== */
 @media (max-width:800px){
@@ -86,4 +304,22 @@ footer p{margin:.2rem 0}
  .articulos-grid{gap:1rem}
  .resumen{padding:.9rem 1rem}
  .lista-categorias{gap:.65rem}
+ /* Ajuste del buscador para que ocupe todo el ancho en celulares */
+ .buscador-campo{max-width:100%}
+
+ /* Botón flotante volver arriba compacto y circular en celulares (responsive) */
+ .btn-volver-arriba{
+     bottom:1.2rem;
+     right:1.2rem;
+     width:46px;
+     height:46px;
+     padding:0;
+     border-radius:50%;
+ }
+ .btn-volver-arriba .texto-arriba{
+     display:none;
+ }
+ .btn-volver-arriba .icono-arriba{
+     font-size:1rem;
+ }
 }

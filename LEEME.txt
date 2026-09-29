@@ -1,11 +1,17 @@
 TecnoBlog - Desarrollo de Front-end, Politecnico Grancolombiano
 Como abrir: descomprimir la carpeta y abrir index.html en Chrome, Firefox o Edge. No necesita internet.
-Archivos: index.html (estructura y textos), css/estilos.css (colores y distribucion), img/ (3 ilustraciones).
+Archivos: index.html (estructura y textos), css/estilos.css (colores y distribucion), img/ (6 ilustraciones SVG locales), js/ y css/ con librerias locales.
 Autores (Grupo B03, Subgrupo 4): Sebastian Acosta Ramirez, Alejandro Cifuentes Osorio, Diego Rojas Marin, Juan David Gomez Arbeladez, Luis Ramos Quesada.
 
 Mejoras
-- se actualiza el UX
-- se incorpora Jquery al proyecto
-- se incluye listado de categorias dinámico con jquery
-- se incluye cambid e año con uso de selector de jquery
+- se actualiza el UX con diseño visual refinado, efectos hover y transiciones suaves
+- se incorpora jQuery local (js/jquery.min.js) y jQuery UI local (js/jquery-ui.min.js y css/jquery-ui.min.css) para funcionamiento 100% sin conexión
+- se incluye botón flotante interactivo y responsive para "Volver arriba" con detección de scroll, animación suave en jQuery y tooltip estilizado en jQuery UI
+- se amplía la colección a 6 artículos y resúmenes completos que corresponden a cada una de las 6 categorías del blog
+- se incluye listado de categorias dinámico e interactivo con jQuery (al hacer clic filtra los artículos y hace scroll suave)
+- se incluye buscador interactivo de artículos en tiempo real con autocompletado inteligente de jQuery UI que abarca todos los artículos y temas
+- se incluye cambio de año dinámico en el footer con selector de jQuery
+- todo el código HTML, CSS y JavaScript queda completamente comentado y documentado de forma didáctica
+
+
 
