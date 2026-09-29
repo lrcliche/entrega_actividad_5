@@ -7,10 +7,12 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <title>TecnoBlog</title>
  <link rel="stylesheet" href="css/estilos.css">
-  <!--  se inlcuye el script de jQuery para uso -->
-  <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
-  <!-- se inlcuye el script de JavaScript General del proyecto -->
-  <script src="js/index.js" defer></script>
+ <!-- Se incluye el script de jQuery local para garantizar funcionamiento sin conexión a Internet -->
+ <script src="js/jquery.min.js"></script>
+ <!-- Respaldo desde CDN por si se requiere en diferentes entornos de desarrollo -->
+ <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.7.1.min.js"><\/script>')</script>
+ <!-- Se incluye el script de JavaScript General del proyecto con las mejoras de UX documentadas -->
+ <script src="js/index.js" defer></script>
 </head>
 <body>
 
@@ -48,28 +50,49 @@
   <!-- Tres artículos del ejercicio, cada uno en una tarjeta -->
   <section class="seccion contenedor" id="articulos">
    <h2>Últimos artículos</h2>
+
+   <!-- Barra de búsqueda interactiva (mejora de UX con jQuery): permite filtrar artículos en tiempo real -->
+   <div class="buscador-contenedor">
+    <div class="buscador-campo">
+     <span class="buscador-icono" aria-hidden="true">🔍</span>
+     <!-- Campo donde el usuario escribe el término a buscar -->
+     <input type="text" id="buscador" class="buscador-input" placeholder="Buscar por tema (ej. HTML, CSS, JavaScript)..." aria-label="Buscar artículos">
+     <!-- Botón interactivo para limpiar la búsqueda rápidamente -->
+     <button type="button" id="btn-limpiar" class="btn-limpiar" title="Limpiar búsqueda" aria-label="Limpiar búsqueda" style="display: none;">&times;</button>
+    </div>
+    <!-- Contador dinámico de resultados para dar retroalimentación inmediata al usuario (UX) -->
+    <p id="contador-articulos" class="contador-articulos">Mostrando 3 de 3 artículos</p>
+   </div>
+
    <div class="articulos-grid">
     <!-- Primer artículo: estructura de una página -->
-    <article class="tarjeta">
+    <article class="tarjeta" data-categoria="html">
      <img src="img/html5.svg" alt="Ilustración de HTML5">
      <h3>¿Qué es HTML5?</h3>
      <p>La base para escribir la estructura de una página web.</p>
      <a class="boton" href="#resumen-html">Leer resumen</a>
     </article>
     <!-- Segundo artículo: estilos -->
-    <article class="tarjeta">
+    <article class="tarjeta" data-categoria="css">
      <img src="img/css3.svg" alt="Ilustración de CSS3">
      <h3>Aprende CSS</h3>
      <p>Colores, espacios y tamaños para que la página se vea ordenada.</p>
      <a class="boton" href="#resumen-css">Leer resumen</a>
     </article>
     <!-- Tercer artículo: comportamiento -->
-    <article class="tarjeta">
+    <article class="tarjeta" data-categoria="javascript">
      <img src="img/javascript.svg" alt="Ilustración de JavaScript">
      <h3>JavaScript</h3>
      <p>El lenguaje que le da vida y respuesta a la página.</p>
      <a class="boton" href="#resumen-js">Leer resumen</a>
     </article>
+   </div>
+
+   <!-- Mensaje informativo que se muestra cuando la búsqueda no coincide con ningún artículo -->
+   <div id="sin-resultados" class="sin-resultados" style="display: none;">
+    <p>🔎 No se encontraron artículos que coincidan con la búsqueda.</p>
+    <!-- Botón con jQuery para restaurar la vista de todos los artículos -->
+    <button type="button" id="btn-restablecer" class="boton-restablecer">Ver todos los artículos</button>
    </div>
   </section>
 
@@ -98,8 +121,10 @@
   <!-- Categorías del blog -->
   <section class="seccion contenedor" id="categorias">
    <h2>Categorías</h2>
-            <!-- Uso una lista porque son varios temas relacionados. -->
-    <ul class="lista-categorias" id="lista-categorias"></ul>
+   <!-- Instrucción de ayuda visual (mejora de UX) para informar que las categorías son interactivas -->
+   <p class="categorias-ayuda">💡 <em>Haz clic en una categoría para filtrar los artículos o vuelve a pulsarla para ver todos:</em></p>
+   <!-- Uso una lista porque son varios temas relacionados. Los elementos se generan y controlan dinámicamente con jQuery -->
+   <ul class="lista-categorias" id="lista-categorias"></ul>
   </section>
 
   <!-- Sobre el blog -->

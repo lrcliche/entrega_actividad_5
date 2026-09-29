@@ -4,8 +4,11 @@ Archivos: index.html (estructura y textos), css/estilos.css (colores y distribuc
 Autores (Grupo B03, Subgrupo 4): Sebastian Acosta Ramirez, Alejandro Cifuentes Osorio, Diego Rojas Marin, Juan David Gomez Arbeladez, Luis Ramos Quesada.
 
 Mejoras
-- se actualiza el UX
-- se incorpora Jquery al proyecto
-- se incluye listado de categorias dinámico con jquery
-- se incluye cambid e año con uso de selector de jquery
+- se actualiza el UX con diseño visual refinado, efectos hover y transiciones suaves
+- se incorpora jQuery local (js/jquery.min.js) para funcionamiento 100% sin conexión
+- se incluye listado de categorias dinámico e interactivo con jQuery (al hacer clic filtra los artículos y hace scroll suave)
+- se incluye buscador interactivo de artículos en tiempo real con contador y botón para limpiar búsqueda con jQuery
+- se incluye cambio de año dinámico en el footer con selector de jQuery
+- todo el código HTML, CSS y JavaScript queda completamente comentado y documentado de forma didáctica
+
 
