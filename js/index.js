@@ -1,5 +1,5 @@
 // TecnoBlog: interactividad desarrollada con Vue 3.
-// Vue administra las tarjetas, la búsqueda, los filtros, las categorías y el año del pie de página.
+// Vue administra las tarjetas, la búsqueda, los filtros, la lectura personal y el año del pie de página.
 
 (function () {
   function iniciarTecnoBlog() {
@@ -15,6 +15,12 @@
         return {
           busqueda: "",
           categoriaActiva: "Todas",
+          estadoLectura: "Todos",
+          estadosLectura: ["Todos", "Favoritos", "Leídos", "Pendientes"],
+          ordenArticulos: "original",
+          temaOscuro: false,
+          favoritos: [],
+          articulosLeidos: [],
           articulos: [
             {
               id: 1,
@@ -61,7 +67,7 @@
         articulosFiltrados() {
           const termino = this.normalizar(this.busqueda);
 
-          return this.articulos.filter(articulo => {
+          const articulosCoincidentes = this.articulos.filter(articulo => {
             const coincideCategoria =
               this.categoriaActiva === "Todas" ||
               articulo.categoria === this.categoriaActiva;
@@ -74,8 +80,37 @@
             ].join(" "));
 
             const coincideBusqueda = !termino || textoArticulo.includes(termino);
-            return coincideCategoria && coincideBusqueda;
+            const coincideEstado =
+              this.estadoLectura === "Todos" ||
+              (this.estadoLectura === "Favoritos" && this.esFavorito(articulo.id)) ||
+              (this.estadoLectura === "Leídos" && this.estaLeido(articulo.id)) ||
+              (this.estadoLectura === "Pendientes" && !this.estaLeido(articulo.id));
+
+            return coincideCategoria && coincideBusqueda && coincideEstado;
           });
+
+          return [...articulosCoincidentes].sort((primero, segundo) => {
+            if (this.ordenArticulos === "titulo-asc") {
+              return this.textoOrdenable(primero.titulo).localeCompare(this.textoOrdenable(segundo.titulo), "es");
+            }
+            if (this.ordenArticulos === "titulo-desc") {
+              return this.textoOrdenable(segundo.titulo).localeCompare(this.textoOrdenable(primero.titulo), "es");
+            }
+            if (this.ordenArticulos === "categoria") {
+              return primero.categoria.localeCompare(segundo.categoria, "es");
+            }
+            return primero.id - segundo.id;
+          });
+        },
+
+        cantidadLeidos() {
+          return this.articulosLeidos.length;
+        },
+
+        porcentajeLectura() {
+          return this.articulos.length
+            ? Math.round((this.cantidadLeidos / this.articulos.length) * 100)
+            : 0;
         },
 
         anioActual() {
@@ -92,8 +127,84 @@
             .trim();
         },
 
+        textoOrdenable(texto) {
+          return this.normalizar(texto).replace(/^[^a-z0-9]+/i, "");
+        },
+
         seleccionarCategoria(categoria) {
           this.categoriaActiva = categoria;
+        },
+
+        esFavorito(idArticulo) {
+          return this.favoritos.includes(idArticulo);
+        },
+
+        estaLeido(idArticulo) {
+          return this.articulosLeidos.includes(idArticulo);
+        },
+
+        alternarFavorito(idArticulo) {
+          this.favoritos = this.alternarId(this.favoritos, idArticulo);
+          this.guardarPreferencias();
+        },
+
+        alternarLeido(idArticulo) {
+          this.articulosLeidos = this.alternarId(this.articulosLeidos, idArticulo);
+          this.guardarPreferencias();
+        },
+
+        marcarLeido(idArticulo) {
+          if (!this.estaLeido(idArticulo)) {
+            this.articulosLeidos = [...this.articulosLeidos, idArticulo];
+            this.guardarPreferencias();
+          }
+        },
+
+        alternarTema() {
+          this.temaOscuro = !this.temaOscuro;
+          this.aplicarTema();
+          this.guardarPreferencias();
+        },
+
+        aplicarTema() {
+          document.body.classList.toggle("tema-oscuro", this.temaOscuro);
+        },
+
+        alternarId(lista, idArticulo) {
+          return lista.includes(idArticulo)
+            ? lista.filter(id => id !== idArticulo)
+            : [...lista, idArticulo];
+        },
+
+        guardarPreferencias() {
+          try {
+            localStorage.setItem("tecnoblog-favoritos", JSON.stringify(this.favoritos));
+            localStorage.setItem("tecnoblog-leidos", JSON.stringify(this.articulosLeidos));
+            localStorage.setItem("tecnoblog-tema-oscuro", String(this.temaOscuro));
+          } catch (error) {
+            console.warn("No fue posible guardar las preferencias de lectura.", error);
+          }
+        },
+
+        cargarPreferencias() {
+          try {
+            const idsValidos = this.articulos.map(articulo => articulo.id);
+            const favoritosGuardados = JSON.parse(localStorage.getItem("tecnoblog-favoritos") || "[]");
+            const leidosGuardados = JSON.parse(localStorage.getItem("tecnoblog-leidos") || "[]");
+            this.temaOscuro = localStorage.getItem("tecnoblog-tema-oscuro") === "true";
+            this.aplicarTema();
+
+            this.favoritos = Array.isArray(favoritosGuardados)
+              ? favoritosGuardados.filter(id => idsValidos.includes(id))
+              : [];
+            this.articulosLeidos = Array.isArray(leidosGuardados)
+              ? leidosGuardados.filter(id => idsValidos.includes(id))
+              : [];
+          } catch (error) {
+            this.favoritos = [];
+            this.articulosLeidos = [];
+            console.warn("No fue posible recuperar las preferencias de lectura.", error);
+          }
         },
 
         limpiarBusqueda() {
@@ -103,6 +214,7 @@
         restablecerFiltros() {
           this.busqueda = "";
           this.categoriaActiva = "Todas";
+          this.estadoLectura = "Todos";
         },
 
         filtrarDesdeCategorias(categoria) {
@@ -113,6 +225,10 @@
             block: "start"
           });
         }
+      },
+
+      mounted() {
+        this.cargarPreferencias();
       }
     }).mount("#app");
   }
