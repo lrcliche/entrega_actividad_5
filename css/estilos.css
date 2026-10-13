@@ -14,6 +14,15 @@ html{scroll-behavior:smooth}
 body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--texto);line-height:1.6;background:var(--blanco)}
 img{max-width:100%;height:auto;display:block}   /* las imágenes se adaptan al ancho */
 a{color:var(--azul)}
+#app{min-height:100vh;background:var(--blanco);transition:background .2s,color .2s}
+.tema-oscuro{
+ --azul-oscuro:#020617;
+ --azul:#3b82f6;
+ --claro:#0f172a;
+ --blanco:#111827;
+ --gris:#94a3b8;
+ --texto:#e2e8f0;
+}
 
 /* Contenedor que centra el contenido y limita su ancho */
 .contenedor{max-width:1000px;margin:0 auto;padding:0 1.2rem}
@@ -31,7 +40,7 @@ header{
     z-index:100;
     border-bottom:1px solid rgba(255,255,255,.08);
 }
-.barra{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding:.8rem 1.2rem}
+.barra{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding:.8rem 1.2rem;position:relative}
 .logo{
     font-weight:800;
     font-size:1.35rem;
@@ -41,6 +50,20 @@ header{
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.2rem}
 nav a{color:var(--blanco);text-decoration:none;padding:.3rem 0;border-bottom:2px solid transparent}
 nav a:hover,nav a:focus{border-bottom-color:#60a5fa}
+.boton-tema{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+    padding:.42rem .7rem;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;
+    background:transparent;
+    color:var(--blanco);
+    font:inherit;
+    font-size:.82rem;
+    cursor:pointer;
+}
+.boton-tema:hover,.boton-tema:focus-visible{background:rgba(255,255,255,.12)}
 
 /* ===== Bienvenida ===== */
 .bienvenida{background:linear-gradient(135deg,var(--azul-oscuro),#1e40af);color:var(--blanco);padding:4rem 0}
@@ -87,6 +110,7 @@ footer p{margin:.2rem 0}
  .barra{padding:1rem;gap:.7rem}
  nav{width:100%}
  nav ul{gap:.5rem 1rem}
+ .boton-tema{position:absolute;right:1rem;top:1rem}
 
  /* La bienvenida ocupa menos alto */
  .bienvenida{padding:2.5rem 0}
@@ -131,8 +155,11 @@ footer p{margin:.2rem 0}
 .contador-articulos{
   color:var(--gris);
   font-size:.9rem;
-  padding-bottom:.2rem;
 }
+.estado-articulos{display:flex;flex-direction:column;align-items:flex-end;padding-bottom:.2rem}
+.progreso-lectura{color:#2563eb;font-size:.82rem;font-weight:700}
+.barra-progreso{width:150px;height:5px;margin-top:.3rem;overflow:hidden;border-radius:999px;background:#dbeafe}
+.barra-progreso span{display:block;height:100%;border-radius:inherit;background:#2563eb;transition:width .25s ease}
 .herramientas-articulos{max-width:680px;margin:0 0 1rem}
 .buscador{
   display:flex;
@@ -173,7 +200,28 @@ footer p{margin:.2rem 0}
   cursor:pointer;
 }
 .ayuda-busqueda{margin:.45rem 0;color:var(--gris);font-size:.85rem}
+.opciones-busqueda{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.ordenamiento{display:flex;align-items:center;gap:.4rem;color:var(--gris);font-size:.85rem;white-space:nowrap}
+.ordenamiento select{
+  padding:.38rem .55rem;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:var(--blanco);
+  color:var(--texto);
+  font:inherit;
+}
 .filtros-rapidos{display:flex;flex-wrap:wrap;gap:.55rem;margin:1rem 0 1.4rem}
+.filtros-lectura{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin:-.5rem 0 1.4rem;
+  padding:.85rem;
+  border-radius:12px;
+  background:var(--claro);
+}
+.titulo-filtros{margin-right:.15rem;color:var(--azul-oscuro);font-size:.9rem;font-weight:750}
 .filtro{
   border:1px solid #cbd5e1;
   border-radius:999px;
@@ -212,6 +260,24 @@ footer p{margin:.2rem 0}
 .contenido-tarjeta h3{margin:.7rem 0 .35rem}
 .contenido-tarjeta p{margin:0 0 1rem}
 .contenido-tarjeta .boton{margin:auto 0 0}
+.acciones-lectura{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem}
+.accion-articulo{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  min-height:36px;
+  padding:.38rem .65rem;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:var(--blanco);
+  color:var(--texto);
+  font:inherit;
+  font-size:.82rem;
+  font-weight:650;
+  cursor:pointer;
+}
+.accion-articulo:hover,.accion-articulo:focus-visible{border-color:var(--azul);background:#eff6ff}
+.accion-articulo.seleccionada{border-color:#2563eb;background:#dbeafe;color:#1d4ed8}
 .boton-secundario{border:0;cursor:pointer;margin:0}
 .sin-resultados{
   text-align:center;
@@ -264,6 +330,19 @@ footer p{margin:.2rem 0}
 .logo-footer{display:inline-block;color:var(--blanco);margin-bottom:.4rem;font-size:1.15rem}
 footer p{overflow-wrap:anywhere}
 [v-cloak]{display:none}
+.tema-oscuro .tarjeta,.tema-oscuro .buscador,.tema-oscuro .resumen,
+.tema-oscuro .lista-categorias li,.tema-oscuro .filtros-lectura,
+.tema-oscuro .sin-resultados{border-color:#334155}
+.tema-oscuro .imagen-tarjeta{background:linear-gradient(135deg,#172554,#111827);border-color:#334155}
+.tema-oscuro .etiqueta-categoria{background:#0c4a6e;color:#bae6fd}
+.tema-oscuro .accion-articulo,.tema-oscuro .filtro{border-color:#475569}
+.tema-oscuro .accion-articulo:hover,.tema-oscuro .accion-articulo:focus-visible{background:#1e293b}
+.tema-oscuro .accion-articulo.seleccionada{background:#1e3a8a;color:#dbeafe}
+.tema-oscuro .categoria-enlace:hover,.tema-oscuro .categoria-enlace:focus-visible{background:#1e3a8a;color:#dbeafe}
+.tema-oscuro .resumen:target{background:#172554}
+.tema-oscuro header,.tema-oscuro header a,.tema-oscuro .boton-tema,
+.tema-oscuro .bienvenida,.tema-oscuro .logo-footer{color:#fff}
+.tema-oscuro .boton:not(.boton-hero){color:#fff}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -274,8 +353,11 @@ footer p{overflow-wrap:anywhere}
 }
 @media (max-width:560px){
   .encabezado-seccion{align-items:start;flex-direction:column;gap:.35rem}
-  .contador-articulos{padding:0}
+  .estado-articulos{align-items:flex-start;padding:0}
+  .opciones-busqueda{align-items:flex-start;flex-direction:column;gap:.35rem}
   .filtros-rapidos{gap:.4rem}
+  .filtros-lectura{gap:.4rem;padding:.75rem}
+  .titulo-filtros{width:100%}
   .filtro{padding:.4rem .75rem}
   .imagen-tarjeta{min-height:125px}
   .imagen-tarjeta img{height:85px}

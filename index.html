@@ -28,6 +28,16 @@
             <li><a href="#blog">Blog</a></li>
           </ul>
         </nav>
+        <button
+          type="button"
+          class="boton-tema"
+          :aria-pressed="temaOscuro"
+          :aria-label="temaOscuro ? 'Activar tema claro' : 'Activar tema oscuro'"
+          @click="alternarTema"
+        >
+          <span aria-hidden="true">{{ temaOscuro ? '☀' : '☾' }}</span>
+          {{ temaOscuro ? 'Tema claro' : 'Tema oscuro' }}
+        </button>
       </div>
     </header>
 
@@ -54,9 +64,24 @@
             <p class="sobrelinea">CONTENIDO DESTACADO</p>
             <h2>Últimos artículos</h2>
           </div>
-          <span class="contador-articulos" aria-live="polite">
-            {{ articulosFiltrados.length }} de {{ articulos.length }} artículos
-          </span>
+          <div class="estado-articulos" aria-live="polite">
+            <span class="contador-articulos">
+              {{ articulosFiltrados.length }} de {{ articulos.length }} artículos
+            </span>
+            <span class="progreso-lectura">
+              {{ cantidadLeidos }} de {{ articulos.length }} leídos
+            </span>
+            <div
+              class="barra-progreso"
+              role="progressbar"
+              aria-label="Progreso de lectura"
+              aria-valuemin="0"
+              :aria-valuemax="articulos.length"
+              :aria-valuenow="cantidadLeidos"
+            >
+              <span :style="{ width: porcentajeLectura + '%' }"></span>
+            </div>
+          </div>
         </div>
 
         <div class="herramientas-articulos">
@@ -77,7 +102,18 @@
               aria-label="Limpiar búsqueda"
             >×</button>
           </label>
-          <p class="ayuda-busqueda">Escribe una palabra, por ejemplo: HTML, estilos o programación.</p>
+          <div class="opciones-busqueda">
+            <p class="ayuda-busqueda">Escribe una palabra, por ejemplo: HTML, estilos o programación.</p>
+            <label class="ordenamiento" for="orden-articulos">
+              Ordenar:
+              <select id="orden-articulos" v-model="ordenArticulos">
+                <option value="original">Orden original</option>
+                <option value="titulo-asc">Título A-Z</option>
+                <option value="titulo-desc">Título Z-A</option>
+                <option value="categoria">Categoría</option>
+              </select>
+            </label>
+          </div>
         </div>
 
         <div class="filtros-rapidos" aria-label="Filtrar artículos por categoría">
@@ -99,6 +135,19 @@
           >{{ categoria }}</button>
         </div>
 
+        <div class="filtros-lectura" aria-label="Filtrar artículos por estado de lectura">
+          <span class="titulo-filtros">Mi lectura:</span>
+          <button
+            v-for="estado in estadosLectura"
+            :key="estado"
+            type="button"
+            class="filtro filtro-lectura"
+            :class="{ activo: estadoLectura === estado }"
+            :aria-pressed="estadoLectura === estado"
+            @click="estadoLectura = estado"
+          >{{ estado }}</button>
+        </div>
+
         <div class="articulos-grid">
           <article
             v-for="articulo in articulosFiltrados"
@@ -112,7 +161,35 @@
               <span class="etiqueta-categoria">{{ articulo.categoria }}</span>
               <h3>{{ articulo.titulo }}</h3>
               <p>{{ articulo.descripcion }}</p>
-              <a class="boton" :href="'#' + articulo.idResumen">Leer resumen <span aria-hidden="true">→</span></a>
+              <div class="acciones-lectura">
+                <button
+                  type="button"
+                  class="accion-articulo"
+                  :class="{ seleccionada: esFavorito(articulo.id) }"
+                  :aria-pressed="esFavorito(articulo.id)"
+                  :aria-label="(esFavorito(articulo.id) ? 'Quitar de favoritos: ' : 'Agregar a favoritos: ') + articulo.titulo"
+                  @click="alternarFavorito(articulo.id)"
+                >
+                  <span aria-hidden="true">{{ esFavorito(articulo.id) ? '★' : '☆' }}</span>
+                  {{ esFavorito(articulo.id) ? 'Favorito' : 'Guardar' }}
+                </button>
+                <button
+                  type="button"
+                  class="accion-articulo"
+                  :class="{ seleccionada: estaLeido(articulo.id) }"
+                  :aria-pressed="estaLeido(articulo.id)"
+                  :aria-label="(estaLeido(articulo.id) ? 'Marcar como pendiente: ' : 'Marcar como leído: ') + articulo.titulo"
+                  @click="alternarLeido(articulo.id)"
+                >
+                  <span aria-hidden="true">{{ estaLeido(articulo.id) ? '✓' : '○' }}</span>
+                  {{ estaLeido(articulo.id) ? 'Leído' : 'Marcar leído' }}
+                </button>
+              </div>
+              <a
+                class="boton"
+                :href="'#' + articulo.idResumen"
+                @click="marcarLeido(articulo.id)"
+              >Leer resumen <span aria-hidden="true">→</span></a>
             </div>
           </article>
         </div>
@@ -120,7 +197,7 @@
         <div v-if="articulosFiltrados.length === 0" class="sin-resultados" role="status">
           <span class="sin-resultados-icono" aria-hidden="true">⌕</span>
           <h3>No encontramos artículos</h3>
-          <p>Prueba con otra palabra o cambia la categoría seleccionada.</p>
+          <p>Prueba con otra palabra o cambia los filtros seleccionados.</p>
           <button class="boton boton-secundario" type="button" @click="restablecerFiltros">Ver todos los artículos</button>
         </div>
       </section>

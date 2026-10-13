@@ -13,6 +13,12 @@ Mejoras implementadas:
 - Mensaje de estado cuando no hay resultados.
 - Contador de resultados y botón para limpiar la búsqueda.
 - Categorías dinámicas que llevan a los artículos filtrados.
+- Favoritos y seguimiento de artículos leídos o pendientes administrados con Vue.
+- Filtros reactivos por estado de lectura y contador de progreso.
+- Preferencias de lectura guardadas en localStorage, sin backend ni base de datos.
+- Los artículos se marcan como leídos automáticamente al abrir su resumen.
+- Barra visual de progreso de lectura y ordenamiento por título o categoría.
+- Tema claro/oscuro persistente administrado por Vue.
 - Año del pie de página actualizado automáticamente por Vue.
 - Se conserva la paleta de colores, la estructura general, los enlaces de navegación, los resúmenes y el diseño adaptable.
 - Se elimina la dependencia de jQuery porque las funciones que realizaba (categorías y año) ahora las gestiona Vue.
