@@ -1,17 +1,27 @@
-TecnoBlog - Desarrollo de Front-end, Politecnico Grancolombiano
-Como abrir: descomprimir la carpeta y abrir index.html en Chrome, Firefox o Edge. No necesita internet.
-Archivos: index.html (estructura y textos), css/estilos.css (colores y distribucion), img/ (6 ilustraciones SVG locales), js/ y css/ con librerias locales.
-Autores (Grupo B03, Subgrupo 4): Sebastian Acosta Ramirez, Alejandro Cifuentes Osorio, Diego Rojas Marin, Juan David Gomez Arbeladez, Luis Ramos Quesada.
+TecnoBlog - versión mejorada con Vue 3
+Proyecto académico de Desarrollo Front-end, Politécnico Grancolombiano.
 
-Mejoras
-- se actualiza el UX con diseño visual refinado, efectos hover y transiciones suaves
-- se incorpora jQuery local (js/jquery.min.js) y jQuery UI local (js/jquery-ui.min.js y css/jquery-ui.min.css) para funcionamiento 100% sin conexión
-- se incluye botón flotante interactivo y responsive para "Volver arriba" con detección de scroll, animación suave en jQuery y tooltip estilizado en jQuery UI
-- se amplía la colección a 6 artículos y resúmenes completos que corresponden a cada una de las 6 categorías del blog
-- se incluye listado de categorias dinámico e interactivo con jQuery (al hacer clic filtra los artículos y hace scroll suave)
-- se incluye buscador interactivo de artículos en tiempo real con autocompletado inteligente de jQuery UI que abarca todos los artículos y temas
-- se incluye cambio de año dinámico en el footer con selector de jQuery
-- todo el código HTML, CSS y JavaScript queda completamente comentado y documentado de forma didáctica
+Cómo abrir:
+1. Descomprime el ZIP.
+2. Abre index.html en Chrome, Firefox o Edge.
+3. Para cargar Vue 3 desde CDN necesitas conexión a Internet.
 
+Mejoras implementadas:
+- Buscador reactivo: filtra por título, descripción, categoría y contenido del resumen.
+- Filtros rápidos por categoría y opción para volver a ver todos los artículos.
+- Tarjetas y resúmenes generados desde una única lista de datos con Vue 3.
+- Mensaje de estado cuando no hay resultados.
+- Contador de resultados y botón para limpiar la búsqueda.
+- Categorías dinámicas que llevan a los artículos filtrados.
+- Año del pie de página actualizado automáticamente por Vue.
+- Se conserva la paleta de colores, la estructura general, los enlaces de navegación, los resúmenes y el diseño adaptable.
+- Se elimina la dependencia de jQuery porque las funciones que realizaba (categorías y año) ahora las gestiona Vue.
 
+Archivos principales:
+- index.html: estructura y plantilla de Vue.
+- css/estilos.css: estilos originales y estilos adicionales.
+- js/index.js: datos, buscador, filtros y lógica de Vue.
+- img/: ilustraciones SVG originales.
 
+Nota:
+Este es un buscador de front-end: filtra los artículos incluidos en el arreglo de js/index.js. No utiliza base de datos ni requiere backend.
